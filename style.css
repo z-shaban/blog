@@ -28,7 +28,7 @@ body{
     color: white;
 }
 
-#newPost{
+#newPostButton{
     align-self: flex-start;
     background-color: #ffffff;
     border: none;
@@ -40,4 +40,39 @@ body{
 
 #newPost:hover{
     background-color: #a9a9a9;
+}
+
+.overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.new-post-modal{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow:  0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    width: 400px;
+    border-radius: 8px;
+}
+
+.new-post-close-button,
+.submitButton{
+    background-color: #a9a9a9;
+    border: none;
+    border-radius: 25px;
+    padding: 3%;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
