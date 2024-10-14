@@ -1,0 +1,43 @@
+html, body {
+    height: 100%; 
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    height: 40%; 
+    background-color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.new-post-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.welcome-message{
+    color: white;
+}
+
+#newPost{
+    align-self: flex-start;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 3%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#newPost:hover{
+    background-color: #a9a9a9;
+}
