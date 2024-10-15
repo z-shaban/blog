@@ -7,21 +7,23 @@ const blogContainer = document.querySelector(".blog-container");
 const newPostTitle = document.querySelector("#new-post-title");
 const newPostContent = document.querySelector("#new-post-content");
 
-function openModal(){
+let currentBlogData = null;
+
+function openModal() {
     newPostModal.style.display = "block";
     overlay.style.display = "block";
-}
+};
 
-function closeModal(){
+function closeModal() {
     newPostModal.style.display = "none";
     overlay.style.display = "none";
-}
+};
 
 newPostButton.addEventListener("click", openModal);
 newPostCloseButton.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
-function createBlogTile(blogData){
+function createBlogTile(blogData) {
     const blogTile = document.createElement('div');
     const blogTitle = document.createElement('h3');
     const blogContent = document.createElement('p');
@@ -37,14 +39,31 @@ function createBlogTile(blogData){
     blogContainer.appendChild(blogTile);
 };
 
+function storeData(blogData) {
+    currentBlogData = blogData;
+    let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    blogs.push(blogData);
+    localStorage.setItem('blogs', JSON.stringify(blogs))
+};
+
 submitButton.addEventListener('click', (event) => {
     event.preventDefault(); 
 
     const blogData = {title : newPostTitle.value, content: newPostContent.value};
     createBlogTile(blogData);
+    storeData(blogData);
 
     closeModal();
 
     newPostTitle.value ="";
     newPostContent.value = "";
-})
+});
+
+function loadBlogs() {
+    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    blogContainer.innerHTML = "";
+
+    blogs.forEach(blog => createBlogTile(blog));
+};
+
+window.addEventListener('load', loadBlogs);
