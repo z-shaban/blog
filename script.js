@@ -70,7 +70,7 @@ function createBlogTile(blogData) {
     deleteButton.classList.add('blog-buttons');
 
     blogTitle.textContent = blogData.title;
-    blogContent.textContent = blogData.content.slice(0, 50) + "...";
+    blogContent.textContent = blogData.content.slice(0, 30) + "...";
     viewButton.textContent =  "view";
     editButton.textContent =  "edit";
     deleteButton.textContent =  "delete";
