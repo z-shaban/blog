@@ -53,7 +53,8 @@ body{
     z-index: 1000;
 }
 
-.new-post-modal{
+.new-post-modal,
+.edit-post-modal{
     display: none;
     position: fixed;
     top: 50%;

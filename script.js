@@ -10,18 +10,25 @@ const newPostContent = document.querySelector("#new-post-content");
 const viewPage = document.querySelector(".view-page");
 const viewTitle = document.querySelector(".view-title");
 const viewContent = document.querySelector(".view-content");
-const viewBackButton = document.querySelector(".view-back-button")
+const viewBackButton = document.querySelector(".view-back-button");
+const editPostModal = document.querySelector(".edit-post-modal");
+const editPostCloseButton = document.querySelector(".edit-post-close-button");
+const editSaveButton = document.querySelector(".editSaveButton");
+const editPostTitle = document.querySelector("#edit-post-title");
+const editPostContent = document.querySelector("#edit-post-content");
 
 let currentBlogData = null;
 
 function openModal() {
     newPostModal.style.display = "block";
     overlay.style.display = "block";
+    editPostModal.style.display = "block";
 };
 
 function closeModal() {
     newPostModal.style.display = "none";
     overlay.style.display = "none";
+    editPostModal.style.display = "none";
 };
 
 newPostButton.addEventListener("click", openModal);
@@ -63,6 +70,7 @@ function createBlogTile(blogData) {
     blogContainer.appendChild(blogTile);
 
     viewButton.addEventListener('click',() => viewBlog(blogData));
+    editButton.addEventListener('click',() => editBlog(blogData));
 };
 
 function viewBlog(blogData) {
@@ -72,6 +80,32 @@ function viewBlog(blogData) {
     blog.style.display = "none";
     viewPage.style.display ="block";
 };
+
+function editBlog(blogData) {
+    currentBlogData = blogData;
+    openModal();
+
+    editPostTitle.value = blogData.title;
+    editPostContent.value = blogData.content;
+
+};
+
+editSaveButton.addEventListener('click', ()=>{
+    let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    let blog = blogs.find(blog => blog.title === currentBlogData.title);
+
+    if(blog){
+        blog.title = editPostTitle.value;
+        blog.content = editPostContent.value;
+        localStorage.setItem('blogs', JSON.stringify(blogs));
+    }
+
+    closeModal();
+});
+
+editPostCloseButton.addEventListener('click', ()=>{
+    closeModal();
+});
 
 function storeData(blogData) {
     currentBlogData = blogData;
