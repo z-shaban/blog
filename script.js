@@ -19,21 +19,32 @@ const editPostContent = document.querySelector("#edit-post-content");
 
 let currentBlogData = null;
 
-function openModal() {
+function openNewModal() {
     newPostModal.style.display = "block";
     overlay.style.display = "block";
-    editPostModal.style.display = "block";
 };
 
-function closeModal() {
+function openEditModal() {
+    editPostModal.style.display = "block";
+    overlay.style.display = "block";
+};
+
+function closeNewModal() {
     newPostModal.style.display = "none";
+    overlay.style.display = "none";
+};
+
+function closeEditModal() {
     overlay.style.display = "none";
     editPostModal.style.display = "none";
 };
 
-newPostButton.addEventListener("click", openModal);
-newPostCloseButton.addEventListener("click", closeModal);
-overlay.addEventListener("click", closeModal);
+newPostButton.addEventListener("click", openNewModal);
+newPostCloseButton.addEventListener("click", closeNewModal);
+overlay.addEventListener("click", () =>{
+    closeNewModal();
+    closeEditModal();
+});
 viewBackButton.addEventListener('click', ()=> {
     blog.style.display = "block"
     viewPage.style.display = "none"
@@ -84,7 +95,7 @@ function viewBlog(blogData) {
 
 function editBlog(blogData) {
     currentBlogData = blogData;
-    openModal();
+    openEditModal();
 
     editPostTitle.value = blogData.title;
     editPostContent.value = blogData.content;
@@ -131,7 +142,7 @@ submitButton.addEventListener('click', (event) => {
     createBlogTile(blogData);
     storeData(blogData);
 
-    closeModal();
+    closeNewModal();
 
     newPostTitle.value ="";
     newPostContent.value = "";
