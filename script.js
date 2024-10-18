@@ -71,6 +71,7 @@ function createBlogTile(blogData) {
 
     viewButton.addEventListener('click',() => viewBlog(blogData));
     editButton.addEventListener('click',() => editBlog(blogData));
+    deleteButton.addEventListener('click',() => deleteBlog(blogData, blogTile));
 };
 
 function viewBlog(blogData) {
@@ -106,6 +107,15 @@ editSaveButton.addEventListener('click', ()=>{
 editPostCloseButton.addEventListener('click', ()=>{
     closeModal();
 });
+
+function deleteBlog(blogData, blogTile){
+    currentBlogData = blogData;
+    let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    let updatedBlog = blogs.filter(blog => blog.title !== currentBlogData.title);
+    localStorage.setItem('blogs', JSON.stringify(updatedBlog));
+    
+    blogTile.remove();
+}
 
 function storeData(blogData) {
     currentBlogData = blogData;
