@@ -112,11 +112,11 @@ editSaveButton.addEventListener('click', ()=>{
         localStorage.setItem('blogs', JSON.stringify(blogs));
     }
 
-    closeModal();
+    closeEditModal();
 });
 
 editPostCloseButton.addEventListener('click', ()=>{
-    closeModal();
+    closeEditModal();
 });
 
 function deleteBlog(blogData, blogTile){
